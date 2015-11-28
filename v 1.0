@@ -1,0 +1,47 @@
+# Esta función verifica si es valido colocar un valor en particular en cierta posición
+
+def Valid( num, sudoku[][9], fila, col)
+    i=0;
+    sec_fila = 3*(fila / 3)
+    sec_col = 3*(col / 3)
+    fila1 = (fila + 2)%3
+    fila2 = (fila + 4)%3
+    col1 = (col + 2)%3
+    col2 = (col + 4)%3
+ 
+    # Revisa el valor en la fila y columna dadas
+    for i in range(9)
+        if sudoku[i][col] == num:
+            return 0
+        elif puzzle[fila][i] == num:
+            return 0
+ 
+    # Revisa las cuatro casillas restantes en este sector
+    if sudoku[fila1 + sec_fila][col1 + sec_col] == num:
+        return 0
+    elif sudoku[fila2 + sec_fila][col1 + sec_col] == num:
+        return 0
+    if puzzle[fila1 + sec_fila][col2 + sec_col] == num:
+        return 0
+    if puzzle[fila2 + sec_fila][col2 + sec_col] == num:
+        return 0
+    else:
+        return 1
+        
+def Sudoku_solving( sudoku[][9], fila, col)
+    nextNum = 1;
+    if fila == 9:
+        return 1
+ 
+    # No queremos cambiar un elemento si ya lo fijamos 
+    # Asi que avanzamos inmediateamente a la siguiente celda
+    
+    if sudoku[fila][col]:
+        if col == 8:
+            if Sudoku_solving( sudoku, fila + 1, 0):
+                return 1
+        elif sudoku_solving( sudoku, fila, col + 1):
+            return 1
+    else:
+        return 0
+    # loop iteration from above 
